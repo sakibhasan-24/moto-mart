@@ -1,4 +1,4 @@
-import { createBrowserRouter, Router } from "react-router";
+import { createBrowserRouter } from "react-router";
 import MainLayout from "../layout/MainLayout";
 
 const router = createBrowserRouter([

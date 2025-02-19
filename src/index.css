@@ -6,3 +6,8 @@ body {
   margin: 0;
   font-family: "Arial", sans-serif;
 }
+@layer utilities {
+  .neon-text {
+    text-shadow: 0px 0px 5px currentColor, 0px 0px 10px currentColor;
+  }
+}

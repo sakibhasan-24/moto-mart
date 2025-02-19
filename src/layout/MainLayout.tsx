@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar/Navbar";
+import Navbar from "../components/NavbarLogo/Navbar";
 
 export default function MainLayout() {
   return (
