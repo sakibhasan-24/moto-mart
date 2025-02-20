@@ -4,9 +4,12 @@ import matchRouter from "../../utils/matchRouter";
 
 export default function AuthLayout() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 ">
+    <div className="flex p-6 flex-col items-center justify-center my-6 min-h-screen ">
       {/* Navigation Links */}
-      <nav className="mb-6 flex space-x-6 bg-gray-800 px-6 py-3 rounded-lg shadow-lg">
+      <nav
+        className="mb-6 flex  border-4 
+      border-transparent animate-border space-x-6 bg-gray-800 px-6 py-3 rounded-lg shadow-lg"
+      >
         <Link
           to="/login"
           className={`text-4xl text-blue-700  font-semibold neon-text-auth 
