@@ -11,7 +11,7 @@ export default function AuthLayout() {
       border-transparent animate-border space-x-6 bg-gray-800 px-6 py-3 rounded-lg shadow-lg"
       >
         <Link
-          to="/login"
+          to="/auth/login"
           className={`text-4xl text-blue-700  font-semibold neon-text-auth 
             transition-all duration-500 ease-in-out 
             hover:text-sky-50 hover:bg-teal-700 hover:px-4 hover:py-2 
@@ -25,7 +25,7 @@ export default function AuthLayout() {
           Login
         </Link>
         <Link
-          to="/signup"
+          to="/auth/signup"
           className={`text-4xl text-green-600 font-semibold neon-text-auth 
             transition-all duration-500 ease-in-out 
             hover:text-sky-50 hover:bg-green-700 hover:px-4 hover:py-2 

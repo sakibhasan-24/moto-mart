@@ -5,9 +5,11 @@ type TAuthState = {
   token: null | string;
 };
 
+const storedUser = localStorage.getItem("user");
+const storedToken = localStorage.getItem("token");
 const initialState: TAuthState = {
-  user: null,
-  token: null,
+  user: storedUser ? JSON.parse(storedUser) : null,
+  token: storedToken || null,
 };
 
 const authSlice = createSlice({
@@ -20,11 +22,15 @@ const authSlice = createSlice({
     ) => {
       state.user = action.payload.user;
       state.token = action.payload?.token;
+      localStorage.setItem("user", JSON.stringify(action.payload.user));
+      localStorage.setItem("token", action.payload.token);
     },
 
     logout: (state) => {
       state.user = null;
       state.token = null;
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
     },
   },
 });

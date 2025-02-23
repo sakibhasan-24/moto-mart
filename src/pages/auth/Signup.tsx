@@ -25,9 +25,9 @@ export default function Signup() {
     e.preventDefault();
     try {
       const response = await signup(formData).unwrap();
-      dispatch(setUser(response)); // ✅ Store token & user in Redux
-      localStorage.setItem("token", response.token); // ✅ Store token in localStorage
-      navigate("/dashboard"); // ✅ Redirect user to dashboard
+      console.log(response);
+      dispatch(setUser(response));
+      navigate("/dashboard");
     } catch (err) {
       console.error("Signup failed:", err);
     }
@@ -98,7 +98,7 @@ export default function Signup() {
 
         <p className="mt-4 text-center text-gray-400">
           Already have an account?{" "}
-          <Link to="/login" className="text-blue-400 hover:underline">
+          <Link to="/auth/login" className="text-blue-400 hover:underline">
             Login here
           </Link>
         </p>

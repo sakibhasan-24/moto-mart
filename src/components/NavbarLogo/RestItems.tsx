@@ -1,11 +1,18 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { FiUser, FiLogOut, FiGrid } from "react-icons/fi";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { logout } from "../../redux/features/auth.slice";
 
 export default function RestItems() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const isLoggedIn = true;
+  const { user } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+  // console.log(user);
 
+  const handleLogOut = async () => {
+    dispatch(logout());
+  };
   return (
     <nav className="p-4 rounded-lg shadow-lg">
       <ul className="flex space-x-6 justify-center text-sm sm:text-base font-semibold items-center">
@@ -26,7 +33,7 @@ export default function RestItems() {
           </Link>
         </li>
 
-        {isLoggedIn ? (
+        {user ? (
           <div className="relative">
             <button
               className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center 
@@ -44,7 +51,10 @@ export default function RestItems() {
                 >
                   <FiGrid className="mr-2" /> Dashboard
                 </Link>
-                <button className="w-full text-left flex items-center px-4 py-2 hover:bg-gray-800 transition-all duration-200">
+                <button
+                  onClick={handleLogOut}
+                  className="w-full text-left flex items-center px-4 py-2 hover:bg-gray-800 transition-all duration-200"
+                >
                   <FiLogOut className="mr-2" /> Logout
                 </button>
               </div>
@@ -53,7 +63,7 @@ export default function RestItems() {
         ) : (
           <li>
             <Link
-              to="/login"
+              to="/auth/login"
               className="text-green-400 neon-text hover:text-green-300 transition-all duration-300"
             >
               Login
