@@ -1,9 +1,13 @@
 import { RouterProvider } from "react-router";
 import router from "./routes/routes";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 const App: React.FC = () => (
   <div>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </div>
 );
 

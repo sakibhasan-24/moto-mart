@@ -1,21 +1,36 @@
 import { useState } from "react";
 import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../../redux/hooks";
+import { useNavigate } from "react-router";
+import { setUser } from "../../redux/features/auth.slice";
+import { useSignupMutation } from "../../redux/api/authApi";
 
 export default function Signup() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [signup, { isLoading, error }] = useSignupMutation();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
+    role: "customer",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Signup Data:", formData);
+    try {
+      const response = await signup(formData).unwrap();
+      dispatch(setUser(response)); // ✅ Store token & user in Redux
+      localStorage.setItem("token", response.token); // ✅ Store token in localStorage
+      navigate("/dashboard"); // ✅ Redirect user to dashboard
+    } catch (err) {
+      console.error("Signup failed:", err);
+    }
   };
 
   return (
@@ -67,6 +82,11 @@ export default function Signup() {
               required
             />
           </div>
+          {error && (
+            <p className="text-red-500 text-sm text-center">
+              {(error as any).data?.message || "Signup failed!"}
+            </p>
+          )}
 
           <button
             type="submit"

@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiMenu, FiShoppingCart, FiX } from "react-icons/fi";
 import SearchBox from "../searchbox/SearchBox";
 import NavbarLogo from "./NavbarLogo";
 import RestItems from "./RestItems";
+import CartIcon from "./CartIcon";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(1);
 
   return (
     <nav
@@ -16,10 +18,12 @@ export default function Navbar() {
         <NavbarLogo />
       </div>
 
-      <div className="hidden md:block">
+      {/* <div className="hidden md:block">
         <SearchBox />
-      </div>
+      </div> */}
 
+      {/* Cart Icon (Only Shows When Cart Has Items) */}
+      <CartIcon />
       <div className="hidden lg:flex">
         <RestItems />
       </div>
