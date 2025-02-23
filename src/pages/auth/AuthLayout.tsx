@@ -17,7 +17,7 @@ export default function AuthLayout() {
             hover:text-sky-50 hover:bg-teal-700 hover:px-4 hover:py-2 
             hover:rounded-lg hover:scale-110 
             ${
-              matchRouter("/login")
+              matchRouter("/auth/login")
                 ? "scale-110 bg-teal-700 text-sky-50 p-2 rounded-lg "
                 : ""
             }`}
@@ -31,7 +31,7 @@ export default function AuthLayout() {
             hover:text-sky-50 hover:bg-green-700 hover:px-4 hover:py-2 
             hover:rounded-lg hover:scale-110 
             ${
-              matchRouter("/signup")
+              matchRouter("/auth/signup")
                 ? "scale-110 bg-teal-700 text-sky-50 p-2 rounded-lg "
                 : ""
             }`}

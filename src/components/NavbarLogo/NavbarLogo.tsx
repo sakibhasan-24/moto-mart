@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import HeaderText from "./HeaderText";
+import { Link } from "react-router-dom";
 
 const NavbarLogo = () => {
   return (
-    <div className="flex  ">
+    <Link to="/" className="flex  ">
       <motion.h1
         className="text-3xl sm:text-4xl font-extrabold flex items-center"
         initial={{ opacity: 0 }}
@@ -21,7 +22,7 @@ const NavbarLogo = () => {
         </motion.span>
         <HeaderText color="red" text="Mart" />
       </motion.h1>
-    </div>
+    </Link>
   );
 };
 

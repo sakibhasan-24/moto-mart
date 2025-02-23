@@ -43,7 +43,7 @@ export default function Login() {
       });
 
       setTimeout(() => {
-        navigate("/dashboard");
+        navigate("/dashboard/profile");
       }, 3000);
     } catch (err: any) {
       console.error("Login  failed:", err);
@@ -95,12 +95,6 @@ export default function Login() {
             icon={<FaSignInAlt className="mr-2 text-lg" />}
           />
         </form>
-
-        {/* {error && (
-          <p className="text-red-500 text-center mt-2">
-            {(error as any)?.data?.message || "Login failed. Try again."}
-          </p>
-        )} */}
 
         <div className="mt-4 text-center text-gray-400">
           <Link

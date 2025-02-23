@@ -37,7 +37,7 @@ export default function Signup() {
       });
 
       setTimeout(() => {
-        navigate("/dashboard");
+        navigate("/dashboard/profile");
       }, 3000);
     } catch (err: any) {
       console.error("Signup failed:", err);
