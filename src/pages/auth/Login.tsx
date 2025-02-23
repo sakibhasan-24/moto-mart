@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { FaEnvelope, FaLock } from "react-icons/fa";
+import { FaEnvelope, FaLock, FaSignInAlt } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useLoginMutation } from "../../redux/api/authApi";
 import { setUser } from "../../redux/features/auth.slice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { toast } from "react-toastify";
+import AuthButton from "../../components/button/AuthButton";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -24,12 +26,32 @@ export default function Login() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // try {
+    //   const response = await login(formData).unwrap();
+    //   dispatch(setUser(response));
+    //   navigate("/dashboard");
+    // } catch (err) {
+    //   console.error("Login error:", err);
+    // }
     try {
       const response = await login(formData).unwrap();
       dispatch(setUser(response));
-      navigate("/dashboard");
-    } catch (err) {
-      console.error("Login error:", err);
+
+      toast.success("Signup successful!", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 3000);
+    } catch (err: any) {
+      console.error("Login  failed:", err);
+
+      toast.error(err?.data?.message || "Login failed. Please try again!", {
+        position: "top-right",
+        autoClose: 4000,
+      });
     }
   };
 
@@ -67,20 +89,18 @@ export default function Login() {
             />
           </div>
 
-          <button
-            type="submit"
-            className="w-full py-3 cursor-pointer bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all"
-            disabled={isLoading}
-          >
-            {isLoading ? "Logging in..." : "Login"}
-          </button>
+          <AuthButton
+            isLoading={isLoading}
+            text="Login"
+            icon={<FaSignInAlt className="mr-2 text-lg" />}
+          />
         </form>
 
-        {error && (
+        {/* {error && (
           <p className="text-red-500 text-center mt-2">
             {(error as any)?.data?.message || "Login failed. Try again."}
           </p>
-        )}
+        )} */}
 
         <div className="mt-4 text-center text-gray-400">
           <Link

@@ -1,15 +1,19 @@
 import { useState } from "react";
-import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
+import { FaUser, FaEnvelope, FaLock, FaUserPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
 import { useNavigate } from "react-router";
 import { setUser } from "../../redux/features/auth.slice";
 import { useSignupMutation } from "../../redux/api/authApi";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AuthButton from "../../components/button/AuthButton";
 
 export default function Signup() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [signup, { isLoading, error }] = useSignupMutation();
+  const [signup, { isLoading }] = useSignupMutation();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -25,21 +29,30 @@ export default function Signup() {
     e.preventDefault();
     try {
       const response = await signup(formData).unwrap();
-      console.log(response);
       dispatch(setUser(response));
-      navigate("/dashboard");
-    } catch (err) {
+
+      toast.success("Signup successful! Redirecting...", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 3000);
+    } catch (err: any) {
       console.error("Signup failed:", err);
+
+      toast.error(err?.data?.message || "Signup failed. Please try again!", {
+        position: "top-right",
+        autoClose: 4000,
+      });
     }
   };
 
   return (
-    <div className="flex  items-center justify-center px-6">
-      <div
-        className="w-full max-w-md  border-4 
-      border-transparent animate-border text-white p-6 rounded-lg shadow-lg"
-      >
-        <h2 className="text-2xl sm:text-6xl font-bold text-center mb-6 text-green-600">
+    <div className="flex items-center justify-center px-6 min-h-screen">
+      <div className="w-full max-w-md border-4 border-transparent animate-border text-white p-6 rounded-lg shadow-lg">
+        <h2 className="text-2xl sm:text-4xl font-bold text-center mb-6 text-green-600">
           Sign Up
         </h2>
 
@@ -82,18 +95,12 @@ export default function Signup() {
               required
             />
           </div>
-          {error && (
-            <p className="text-red-500 text-sm text-center">
-              {(error as any).data?.message || "Signup failed!"}
-            </p>
-          )}
 
-          <button
-            type="submit"
-            className="w-full py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all"
-          >
-            Sign Up
-          </button>
+          <AuthButton
+            isLoading={isLoading}
+            text="Sign Up"
+            icon={<FaUserPlus className="mr-2 text-lg" />}
+          />
         </form>
 
         <p className="mt-4 text-center text-gray-400">
