@@ -25,7 +25,7 @@ export default function Banner() {
           Next <HeaderText color="red" text="LEVEL" />
           <span className="text-blue-400">Future</span> Today!
         </motion.h1>
-        {/* check for git */}
+
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}

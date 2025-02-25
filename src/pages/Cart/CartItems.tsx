@@ -1,24 +1,40 @@
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { removeFromCart, clearCart } from "../../redux/features/product.slice";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Import styles for toast notifications
+import "react-toastify/dist/ReactToastify.css";
 
 export default function CartItems() {
   const dispatch = useAppDispatch();
   const { cartItems } = useAppSelector((state) => state.items);
+  const { offer, claimed } = useAppSelector((state) => state.offer);
 
   const overallTotalPrice = cartItems.reduce(
     (acc, item) => acc + item.totalPrice,
     0
   );
 
+  // Apply discount if offer is claimed
+  const discountAmount = claimed ? (overallTotalPrice * offer) / 100 : 0;
+  const discountedTotal = overallTotalPrice - discountAmount;
+
+  useEffect(() => {
+    if (!claimed && overallTotalPrice > 0) {
+      toast.info("🎁 Don't miss out on your exclusive discount!", {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: true,
+      });
+    }
+  }, [claimed, overallTotalPrice]);
+
   const handleRemove = (id: string) => {
     dispatch(removeFromCart(id));
     toast.success("Item removed!", {
       position: "top-right",
-      autoClose: 2000, // Closes after 2 seconds
+      autoClose: 2000,
       hideProgressBar: true,
     });
   };
@@ -96,11 +112,43 @@ export default function CartItems() {
             </table>
           </div>
 
-          <div className="mt-6 flex justify-between items-center bg-gray-800 p-4 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold">Overall Total:</h2>
-            <span className="text-yellow-500 font-bold text-2xl">
-              ${overallTotalPrice}
-            </span>
+          {/* Order Summary Section */}
+          <div className="mt-6 bg-gray-800 p-4 rounded-lg shadow-md space-y-2">
+            <h2 className="text-xl font-semibold">Order Summary</h2>
+
+            {/* Total Amount Before Discount */}
+            <div className="flex justify-between">
+              <span className="text-gray-300">Total Amount:</span>
+              <span className="text-yellow-400 font-bold text-lg">
+                ${overallTotalPrice.toFixed(2)}
+              </span>
+            </div>
+
+            {/* Saved Amount */}
+            {claimed && (
+              <div className="flex justify-between">
+                <span className="text-gray-300">You Saved:</span>
+                <span className="text-green-400 font-bold text-lg">
+                  -${discountAmount.toFixed(2)}
+                </span>
+              </div>
+            )}
+
+            {/* Final Amount After Discount */}
+            <div className="flex justify-between">
+              <span className="text-gray-300">Final Amount to Pay:</span>
+              <span className="text-yellow-400 font-bold text-lg">
+                ${claimed ? discountedTotal.toFixed(2) : overallTotalPrice}
+              </span>
+            </div>
+
+            {/* Savings Message */}
+            {claimed && (
+              <p className="text-green-400 text-sm text-center mt-2">
+                🎉 You saved <strong>${discountAmount.toFixed(2)}</strong> with{" "}
+                <strong>{offer}%</strong> Off!
+              </p>
+            )}
           </div>
 
           <div className="flex justify-between mt-6">

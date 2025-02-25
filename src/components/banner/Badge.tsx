@@ -1,24 +1,70 @@
-import React from "react";
-import { motion } from "framer-motion";
-export default function Badge() {
-  return (
-    <motion.div
-      initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
-      whileHover={{ scale: 1.1 }}
-      transition={{ duration: 0.5, type: "spring" }}
-      className="relative inline-block mt-4 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500
-     backdrop-blur-md text-white px-6 py-3 rounded-full shadow-lg text-sm font-semibold mx-5
-     animate-pulse border border-white/20"
-    >
-      <div className="absolute inset-0 rounded-full bg-blue-500 blur-lg opacity-50"></div>
+import React, { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { checkOfferExpiry, claimOffer } from "../../redux/offer.slice";
 
-      <div className="relative flex items-center space-x-2">
+export default function Badge() {
+  const dispatch = useAppDispatch();
+  const { offer, claimed, expiryTime } = useAppSelector((state) => state.offer);
+  const [timeLeft, setTimeLeft] = useState<number | null>(null);
+
+  useEffect(() => {
+    dispatch(checkOfferExpiry());
+
+    if (expiryTime) {
+      const interval = setInterval(() => {
+        const remainingTime = Math.max(
+          0,
+          Math.floor((expiryTime - Date.now()) / 1000)
+        );
+        setTimeLeft(remainingTime);
+
+        if (remainingTime <= 0) {
+          clearInterval(interval);
+          dispatch(checkOfferExpiry());
+        }
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [dispatch, expiryTime]);
+
+  const handleClaimOffer = () => {
+    if (!claimed) {
+      dispatch(claimOffer());
+    }
+  };
+
+  const formatTime = (seconds: number | null) => {
+    if (seconds === null) return "";
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${hrs.toString().padStart(2, "0")}:${mins
+      .toString()
+      .padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+  };
+
+  return (
+    <div className="flex items-center justify-center mt-4">
+      <div className="bg-gray-800 text-white px-5 py-2 rounded-md shadow-md text-sm font-semibold flex items-center gap-3">
         <span className="text-lg">🏍️</span>
-        <span className="uppercase font-bold tracking-wide">
-          Limited Time Offer: 30% Off!
-        </span>
+
+        {claimed ? (
+          <div className="flex flex-col">
+            <span className="font-bold">🎉 {offer}% Off!</span>
+            <span className="text-xs text-yellow-400">
+              ⏳ Expires in: {formatTime(timeLeft)}
+            </span>
+          </div>
+        ) : (
+          <button
+            onClick={handleClaimOffer}
+            className="bg-yellow-500 text-black px-3 py-1 rounded-md text-xs font-bold hover:bg-yellow-600 transition"
+          >
+            🎁 Mystery Offer!
+          </button>
+        )}
       </div>
-    </motion.div>
+    </div>
   );
 }
