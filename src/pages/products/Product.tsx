@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
 import { FaSadTear } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function ProductCard({ product }: any) {
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
-      className="relative w-80 p-5 rounded-lg overflow-hidden shadow-xl transition-all duration-500 hover:shadow-2xl"
+      className="relative max-w-md mx-auto sm:w-80 p-5 rounded-lg overflow-hidden shadow-xl transition-all duration-500 hover:shadow-2xl"
       style={{
         background:
           "linear-gradient(135deg, rgba(25, 29, 52, 0.9), rgba(54, 0, 51, 0.9))",
@@ -70,13 +71,16 @@ export default function ProductCard({ product }: any) {
           )}
         </div>
 
-        <motion.button
-          whileTap={{ scale: 0.95 }}
-          className="mt-4 px-6 py-2 bg-gradient-to-r from-yellow-500 to-yellow-700 text-black text-lg font-semibold rounded-full shadow-lg hover:from-yellow-600 hover:to-yellow-800 transition-all"
-        >
-          View Details
-        </motion.button>
+        <Link to={`/product/${product._id}`}>
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            className="mt-4 px-6 py-2 bg-gradient-to-r from-yellow-500 to-yellow-700 text-black text-lg font-semibold rounded-full shadow-lg hover:from-yellow-600 hover:to-yellow-800 transition-all"
+          >
+            View Details
+          </motion.button>
+        </Link>
       </div>
     </motion.div>
   );
 }
+// ``

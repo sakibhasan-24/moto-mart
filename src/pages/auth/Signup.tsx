@@ -18,7 +18,7 @@ export default function Signup() {
     name: "",
     email: "",
     password: "",
-    role: "customer",
+    role: "admin",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

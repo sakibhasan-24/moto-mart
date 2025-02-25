@@ -7,6 +7,11 @@ import Home from "../pages/home/Home";
 import Dashboard from "../pages/dashboard/Dashboard";
 import Profile from "../pages/dashboard/Profile";
 import ProtectedRoute from "./protectedRoutes";
+import ProductDetails from "../pages/products/ProductDetails";
+import ProductCreate from "../redux/api/admin/ProductCreate";
+import AdminRoute from "./adminRoutes";
+import AdminProducts from "../redux/api/admin/AdminProducts";
+import AdminEditProducts from "../redux/api/admin/AdminEditProducts";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +51,40 @@ const router = createBrowserRouter([
           { path: "login", element: <Login /> },
           { path: "signup", element: <Signup /> },
         ],
+      },
+      {
+        path: "/product/:id",
+        element: <ProductDetails />,
+      },
+      {
+        path: "/create-product",
+        element: (
+          <ProtectedRoute>
+            <AdminRoute>
+              <ProductCreate />
+            </AdminRoute>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/admin/products",
+        element: (
+          <ProtectedRoute>
+            <AdminRoute>
+              <AdminProducts />
+            </AdminRoute>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/admin/edit-product/:id",
+        element: (
+          <ProtectedRoute>
+            <AdminRoute>
+              <AdminEditProducts />
+            </AdminRoute>
+          </ProtectedRoute>
+        ),
       },
     ],
   },
