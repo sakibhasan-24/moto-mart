@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetProductByIdMutation } from "../../redux/api/productsApi";
 import { useAppDispatch } from "../../redux/hooks";
 import { addToCart } from "../../redux/features/product.slice";
@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function ProductDetails() {
   const { id } = useParams();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [getProductById, { data: product, isLoading, error }] =
     useGetProductByIdMutation();
 
@@ -80,6 +81,7 @@ export default function ProductDetails() {
 
     dispatch(addToCart(cartItem));
     toast.success("Added to cart successfully!");
+    navigate("/cart-items");
   };
 
   return (

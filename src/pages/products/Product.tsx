@@ -74,7 +74,7 @@ export default function ProductCard({ product }: any) {
         <Link to={`/product/${product._id}`}>
           <motion.button
             whileTap={{ scale: 0.95 }}
-            className="mt-4 px-6 py-2 bg-gradient-to-r from-yellow-500 to-yellow-700 text-black text-lg font-semibold rounded-full shadow-lg hover:from-yellow-600 hover:to-yellow-800 transition-all"
+            className="mt-4 px-6 cursor-pointer py-2 bg-gradient-to-r from-yellow-500 to-yellow-700 text-black text-lg font-semibold rounded-full shadow-lg hover:from-yellow-600 hover:to-yellow-800 transition-all"
           >
             View Details
           </motion.button>

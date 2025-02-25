@@ -12,6 +12,7 @@ import ProductCreate from "../redux/api/admin/ProductCreate";
 import AdminRoute from "./adminRoutes";
 import AdminProducts from "../redux/api/admin/AdminProducts";
 import AdminEditProducts from "../redux/api/admin/AdminEditProducts";
+import CartItems from "../pages/Cart/CartItems";
 
 const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
             </AdminRoute>
           </ProtectedRoute>
         ),
+      },
+      {
+        path: "/cart-items",
+        element: <CartItems />,
       },
       {
         path: "/admin/edit-product/:id",
