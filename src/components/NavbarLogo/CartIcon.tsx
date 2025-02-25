@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { FiShoppingCart } from "react-icons/fi";
+import { useAppSelector } from "../../redux/hooks";
 
 export default function CartIcon() {
-  const [cartCount, setCartCount] = useState(1);
+  const { cartItems } = useAppSelector((state) => state.items);
+  console.log(cartItems);
+  // const [cartCount, setCartCount] = useState(1);
   return (
     <div>
-      {cartCount > 0 && (
+      {cartItems?.length > 0 && (
         <div className="relative">
           <button
             className="relative animate-border text-white text-3xl p-3 rounded-full shadow-xl border border-gray-700 
@@ -19,7 +22,7 @@ export default function CartIcon() {
             className="absolute -top-2 -right-2 text-white text-xs font-bold px-3 py-1 rounded-full 
                   bg-white/20 backdrop-blur-md border border-gray-300 shadow-md"
           >
-            {cartCount}
+            {cartItems?.length}
           </span>
         </div>
       )}
