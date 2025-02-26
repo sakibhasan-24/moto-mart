@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { Button, Rate, Input, message } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "../../components/loader/Loader";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -26,7 +27,11 @@ export default function ProductDetails() {
   const [rating, setRating] = useState(5);
 
   if (isLoading)
-    return <p className="text-center text-lg text-white">Loading...</p>;
+    return (
+      <p className="text-center text-lg text-white">
+        <Loader />
+      </p>
+    );
 
   if (error)
     return (

@@ -8,12 +8,12 @@ export default function CartIcon() {
   console.log(cartItems);
   // const [cartCount, setCartCount] = useState(1);
   return (
-    <Link to="/cart-items">
-      <div>
+    <Link to="/cart-items" className="cursor-pointer ">
+      <div className="cursor-pointer">
         {cartItems?.length > 0 && (
-          <div className="relative">
+          <div className="relative cursor-pointer">
             <button
-              className="relative animate-border text-white text-3xl p-3 rounded-full shadow-xl border border-gray-700 
+              className="relative cursor-pointer animate-border text-white text-3xl p-3 rounded-full shadow-xl border border-gray-700 
                 bg-gradient-to-b from-gray-800 to-black transition-all duration-300 
                 hover:border-blue-500 hover:shadow-blue-500/50 flex items-center justify-center"
             >

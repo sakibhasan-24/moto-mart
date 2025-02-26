@@ -13,6 +13,7 @@ import AdminRoute from "./adminRoutes";
 import AdminProducts from "../redux/api/admin/AdminProducts";
 import AdminEditProducts from "../redux/api/admin/AdminEditProducts";
 import CartItems from "../pages/Cart/CartItems";
+import ConfirmOrder from "../pages/orderPlace/ConfirmOrder";
 
 const router = createBrowserRouter([
   {
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
             </AdminRoute>
           </ProtectedRoute>
         ),
+      },
+      {
+        path: "/confirm-order",
+        element: <ConfirmOrder />,
       },
     ],
   },

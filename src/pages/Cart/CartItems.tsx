@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { removeFromCart, clearCart } from "../../redux/features/product.slice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,13 +11,19 @@ export default function CartItems() {
   const { cartItems } = useAppSelector((state) => state.items);
   const { offer, claimed } = useAppSelector((state) => state.offer);
 
+  const navigate = useNavigate();
+  const handleNavigationClick = () => {
+    navigate("/confirm-order");
+  };
   const overallTotalPrice = cartItems.reduce(
     (acc, item) => acc + item.totalPrice,
     0
   );
 
   // Apply discount if offer is claimed
-  const discountAmount = claimed ? (overallTotalPrice * offer) / 100 : 0;
+  const discountAmount = claimed
+    ? (overallTotalPrice * Number(offer)) / 100
+    : 0;
   const discountedTotal = overallTotalPrice - discountAmount;
 
   useEffect(() => {
@@ -91,7 +97,9 @@ export default function CartItems() {
               <tbody>
                 {cartItems.map((item) => (
                   <tr key={item.id} className="border-b border-gray-700">
-                    <td className="p-3 text-gray-400">{item.id}</td>
+                    <td className="p-3 text-gray-400">
+                      <Link to={`/product/${item.id}`}>{item.id}</Link>
+                    </td>
                     <td className="p-3 font-semibold">{item.name}</td>
                     <td className="p-3 text-green-400">${item.price}</td>
                     <td className="p-3 font-medium">{item.quantity}</td>
@@ -112,11 +120,9 @@ export default function CartItems() {
             </table>
           </div>
 
-          {/* Order Summary Section */}
           <div className="mt-6 bg-gray-800 p-4 rounded-lg shadow-md space-y-2">
             <h2 className="text-xl font-semibold">Order Summary</h2>
 
-            {/* Total Amount Before Discount */}
             <div className="flex justify-between">
               <span className="text-gray-300">Total Amount:</span>
               <span className="text-yellow-400 font-bold text-lg">
@@ -124,7 +130,6 @@ export default function CartItems() {
               </span>
             </div>
 
-            {/* Saved Amount */}
             {claimed && (
               <div className="flex justify-between">
                 <span className="text-gray-300">You Saved:</span>
@@ -134,7 +139,6 @@ export default function CartItems() {
               </div>
             )}
 
-            {/* Final Amount After Discount */}
             <div className="flex justify-between">
               <span className="text-gray-300">Final Amount to Pay:</span>
               <span className="text-yellow-400 font-bold text-lg">
@@ -142,7 +146,6 @@ export default function CartItems() {
               </span>
             </div>
 
-            {/* Savings Message */}
             {claimed && (
               <p className="text-green-400 text-sm text-center mt-2">
                 🎉 You saved <strong>${discountAmount.toFixed(2)}</strong> with{" "}
@@ -160,6 +163,7 @@ export default function CartItems() {
               Clear Cart
             </button>
             <button
+              onClick={handleNavigationClick}
               className="bg-green-500 cursor-pointer hover:bg-green-600 text-white text-lg px-6 py-3 rounded-md shadow-md"
               disabled={cartItems.length === 0}
             >

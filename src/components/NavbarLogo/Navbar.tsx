@@ -22,7 +22,6 @@ export default function Navbar() {
         <SearchBox />
       </div> */}
 
-      {/* Cart Icon (Only Shows When Cart Has Items) */}
       <CartIcon />
       <div className="hidden lg:flex">
         <RestItems />
