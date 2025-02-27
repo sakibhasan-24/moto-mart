@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 export default function ConfirmOrder() {
   const navigate = useNavigate();
   const { cartItems } = useAppSelector((state) => state.items);
-  const { user, token } = useAppSelector((state) => state.auth);
+  const { user, token }: any = useAppSelector((state) => state.auth);
   const { offer, claimed } = useAppSelector((state) => state.offer);
 
   const dispatch = useAppDispatch();

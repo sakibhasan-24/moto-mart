@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetProductByIdMutation } from "../../redux/api/productsApi";
 import { useAppDispatch } from "../../redux/hooks";
 import { addToCart } from "../../redux/features/product.slice";
 import { motion } from "framer-motion";
-import { Button, Rate, Input, message } from "antd";
+import { Button } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../../components/loader/Loader";
@@ -23,8 +23,6 @@ export default function ProductDetails() {
   }, [id, getProductById]);
 
   const [quantity, setQuantity] = useState(1);
-  const [review, setReview] = useState("");
-  const [rating, setRating] = useState(5);
 
   if (isLoading)
     return (
@@ -33,7 +31,7 @@ export default function ProductDetails() {
       </p>
     );
 
-  if (error)
+  if (error && "message" in error)
     return (
       <p className="text-center text-lg text-red-500">Error: {error.message}</p>
     );

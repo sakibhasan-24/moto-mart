@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ClipLoader } from "react-spinners";
 import { motion } from "framer-motion";
@@ -10,15 +10,21 @@ export default function SearchProducts() {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(5000); // Max price limit
-  const [sortBy, setSortBy] = useState("1"); // "1" = latest first, "-1" = oldest
+  const [maxPrice, setMaxPrice] = useState(5000);
+  const [sortBy, setSortBy] = useState("1");
   const [page, setPage] = useState(1);
-  const limit = 3; // Products per page
+  const limit = 3;
 
-  // Fetch products automatically when filters change
   useEffect(() => {
     const delayFetch = setTimeout(() => {
-      getProducts({ searchTerm, minPrice, maxPrice, sortBy, page, limit });
+      getProducts({
+        searchTerm,
+        minPrice,
+        maxPrice,
+        sortBy,
+        page,
+        limit,
+      } as any);
     }, 300); // Debounce API calls
 
     return () => clearTimeout(delayFetch);
@@ -29,9 +35,7 @@ export default function SearchProducts() {
       <h2 className="text-3xl font-bold text-yellow-400 text-center mb-6">
         🔍 Search & Filter Products
       </h2>
-      {/* Search & Filter Section */}
       <div className="flex flex-col md:flex-row gap-4 items-center justify-center">
-        {/* Search Box */}
         <input
           type="text"
           placeholder="Search by name, brand, category..."
@@ -40,7 +44,6 @@ export default function SearchProducts() {
           className="px-4 py-2 bg-gray-800 border border-gray-600 rounded-md text-white w-full md:w-1/3 focus:outline-none focus:ring focus:border-yellow-400"
         />
 
-        {/* Sort Order */}
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
@@ -50,7 +53,6 @@ export default function SearchProducts() {
           <option value="-1">Oldest First</option>
         </select>
       </div>
-      {/* Price Range Slider */}
       <div className="mt-6 text-center">
         <label className="text-yellow-400 font-semibold">
           Price Range: ${minPrice} - ${maxPrice}
@@ -92,7 +94,6 @@ export default function SearchProducts() {
           />
         </div>
       </div>
-      {/* Loading Spinner */}
       {isLoading && (
         <div className="flex justify-center items-center mt-6">
           <ClipLoader size={40} color="#facc15" />

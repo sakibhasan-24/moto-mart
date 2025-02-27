@@ -5,7 +5,7 @@ import { useAppSelector } from "../../redux/hooks";
 
 export default function Dashboard() {
   const location = useLocation();
-  const { user } = useAppSelector((state) => state.auth);
+  const { user }: any = useAppSelector((state) => state.auth);
   const isAdmin = user?.role === "admin";
 
   return (
