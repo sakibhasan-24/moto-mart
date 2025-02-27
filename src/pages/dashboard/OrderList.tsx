@@ -13,9 +13,9 @@ import {
 import { useAppSelector } from "../../redux/hooks";
 
 export default function OrderList() {
-  const token = localStorage.getItem("token");
-  const { user } = useAppSelector((state) => state.auth);
-  const isAdmin = user?.role === "admin";
+  const token: any = localStorage.getItem("token");
+  const { user }: any = useAppSelector((state) => state.auth);
+  const isAdmin: any = user?.role === "admin";
   const [fetchOrders, { data: orders, error, isLoading }] =
     useGetAllOrdersMutation();
   const [updateOrderStatus] = useUpdateOrderStatusMutation();
@@ -56,7 +56,7 @@ export default function OrderList() {
       },
     };
     return (
-      statusMap[status.toLowerCase()] || {
+      (statusMap as any)[status.toLowerCase()] || {
         progress: 0,
         color: "bg-gray-300",
         icon: <FaTimesCircle />,

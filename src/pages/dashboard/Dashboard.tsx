@@ -1,10 +1,10 @@
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { FaUser, FaShoppingBag, FaBoxes, FaPlus } from "react-icons/fa";
 import matchRouter from "../../utils/matchRouter";
 import { useAppSelector } from "../../redux/hooks";
 
 export default function Dashboard() {
-  const location = useLocation();
+  // const location = useLocation();
   const { user }: any = useAppSelector((state) => state.auth);
   const isAdmin = user?.role === "admin";
 

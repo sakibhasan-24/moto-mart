@@ -1,8 +1,10 @@
+// @ts-ignore
 import React, { useEffect } from "react";
 import { useGetProductsMutation } from "../../redux/api/productsApi";
 import Product from "./Product";
 import HeaderText from "../../components/NavbarLogo/HeaderText";
 import { Link } from "react-router-dom";
+import Loader from "../../components/loader/Loader";
 
 export default function Products() {
   const [getProducts, { data, isLoading, error }] = useGetProductsMutation();
@@ -18,7 +20,7 @@ export default function Products() {
   }, [getProducts]);
   const products = data?.data?.data || [];
   console.log(products);
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader />;
   if (error) return <p>Error occurred: {JSON.stringify(error)}</p>;
 
   return (

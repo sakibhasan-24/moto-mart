@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useAppSelector } from "../../redux/hooks";
+// import { useAppSelector } from "../../redux/hooks";
 import { useChangeUserPasswordMutation } from "../../redux/api/user.api";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 
 export default function Profile() {
-  const { user } = useAppSelector((state) => state.auth);
+  // const { user } = useAppSelector((state) => state.auth);
   const token = localStorage.getItem("token");
 
   const [passwordData, setPasswordData] = useState({

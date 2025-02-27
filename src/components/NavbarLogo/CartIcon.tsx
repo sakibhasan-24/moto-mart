@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import { useAppSelector } from "../../redux/hooks";
 import { Link } from "react-router-dom";

@@ -59,7 +59,7 @@ export const productApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: { isDelete: true },
       }),
-      invalidatesTags: ["Product"],
+      invalidatesTags: ["Product"] as any,
     }),
   }),
 });

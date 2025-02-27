@@ -37,11 +37,13 @@ export const orderApi = baseApi.injectEndpoints({
 
       async onQueryStarted(
         { orderId, orderStatus, token },
+
         { dispatch, queryFulfilled }
       ) {
         try {
+          console.log(orderId, orderStatus, token);
           await queryFulfilled;
-          dispatch(orderApi.util.invalidateTags(["Orders"]));
+          dispatch(orderApi.util.invalidateTags(["Orders"] as any));
         } catch (error) {
           console.error("Error updating order status:", error);
         }

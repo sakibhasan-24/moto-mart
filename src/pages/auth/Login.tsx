@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useLoginMutation } from "../../redux/api/authApi";
 import { setUser } from "../../redux/features/auth.slice";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppDispatch } from "../../redux/hooks";
 import { toast } from "react-toastify";
 import AuthButton from "../../components/button/AuthButton";
 
@@ -17,7 +17,7 @@ export default function Login() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const [login, { isLoading, error }] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

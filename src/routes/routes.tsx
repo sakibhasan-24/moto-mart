@@ -118,12 +118,20 @@ const router = createBrowserRouter([
       },
       {
         path: "/confirm-order",
-        element: <ConfirmOrder />,
+        element: (
+          <ProtectedRoute>
+            <ConfirmOrder />
+          </ProtectedRoute>
+        ),
       },
 
       {
         path: "/payment",
-        element: <Payment />,
+        element: (
+          <ProtectedRoute>
+            <Payment />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

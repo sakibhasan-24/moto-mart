@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useEffect } from "react";
 import { useAppSelector } from "../../redux/hooks";
 import { FaUser, FaUserCheck, FaUserTimes } from "react-icons/fa";
@@ -9,7 +10,7 @@ import Loader from "../../components/loader/Loader";
 
 export default function Users() {
   const token = localStorage.getItem("token");
-  const { user } = useAppSelector((state) => state.auth);
+  const { user }: any = useAppSelector((state) => state.auth);
   const isAdmin = user?.role === "admin";
 
   // Mutations

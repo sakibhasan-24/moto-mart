@@ -52,7 +52,7 @@ export default function ConfirmOrder() {
 
       // Create Order
       const response = await createOrder({ orderData, token }).unwrap();
-      // Clear the cart after successful order
+
       dispatch(clearCart());
       console.log("Order Success:", response);
 
@@ -116,7 +116,7 @@ export default function ConfirmOrder() {
           <h2 className="text-lg font-semibold text-white">Phone Number</h2>
           <input
             type="text"
-            placeholder="Enter your phone number"
+            placeholder="Enter your phone number 11 digits ,starts with 01"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             className="w-full p-3 mt-3 bg-gray-700 text-white rounded-lg outline-none border border-gray-600 focus:ring-2 focus:ring-green-400 transition-all"
@@ -127,7 +127,7 @@ export default function ConfirmOrder() {
         <div className="mt-6">
           <h2 className="text-lg font-semibold text-white">Address</h2>
           <textarea
-            placeholder="Enter your full delivery address"
+            placeholder="Enter your full delivery address eg:road no,sector/block,city"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             className="w-full p-3 mt-3 bg-gray-700 text-white rounded-lg outline-none border border-gray-600 focus:ring-2 focus:ring-green-400 transition-all"

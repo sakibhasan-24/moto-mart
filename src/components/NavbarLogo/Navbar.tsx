@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { FiMenu, FiShoppingCart, FiX } from "react-icons/fi";
-import SearchBox from "../searchbox/SearchBox";
+import { FiMenu, FiX } from "react-icons/fi";
+
 import NavbarLogo from "./NavbarLogo";
 import RestItems from "./RestItems";
 import CartIcon from "./CartIcon";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(1);
+  // const [cartCount, setCartCount] = useState(1);
 
   return (
     <nav
