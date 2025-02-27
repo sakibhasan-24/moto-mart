@@ -45,3 +45,6 @@ body {
     animation: borderAnimation 4s infinite linear;
   }
 }
+button {
+  cursor: pointer;
+}

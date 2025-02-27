@@ -44,9 +44,9 @@ export default function RestItems() {
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-40 bg-gray-900 text-white shadow-lg rounded-lg">
+              <div className="absolute right-0 mt-2 w-40 bg-gray-900 z-50 text-white shadow-lg rounded-lg">
                 <Link
-                  to="/dashboard"
+                  to="/dashboard/profile"
                   className="flex items-center px-4 py-2 hover:bg-gray-800 transition-all duration-200"
                 >
                   <FiGrid className="mr-2" /> Dashboard

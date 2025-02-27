@@ -1,50 +1,93 @@
-# React + TypeScript + Vite
+# Bike-Shop API
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# https://bike-shop-server-weld.vercel.app/api/products
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<!-- need registration,login,jwt,logout,token,payment -->
 
-## Expanding the ESLint configuration
+The **Bike-Shop API** is a backend application for a bike shop API that allows to browse and purchase bikes. The API is built using **Typescript**, **Mongoose**, , **Node.js**,, **Express**, and **Eslint**. The application is deployed on **Vercel**.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## Features
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- Browse available bikes
+- Create A bike
+- Get Bike
+- Admin panel for bike management
+
+---
+
+## Tech Stack
+
+### Backend
+
+- **Node.js**
+- **Express.js** (with TypeScript)
+- **MongoDB** (via Mongoose)
+- **dotenv** (for environment variable management)
+- **ESLint** (for code quality and consistency)
+
+### Deployment
+
+- Hosted on **Vercel**
+
+---
+
+## Setup Instructions
+
+### Prerequisites
+
+- **Node.js**
+- **MongoDB**
+- **npm**
+- **Typescript**
+
+### Installation
+
+- install dependencies
+
+```
+npm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- run the application
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
 ```
+npm run dev
+```
+
+---
+
+## API Endpoints
+
+### GET /bikes
+
+- **Description**: Fetches all available bikes,also add search query.
+- **Response**: An array of bike objects.
+
+### POST /bikes
+
+- **Description**: Creates a new bike.
+- **Request Body**: A JSON object containing bike details.
+
+### Delete /bikes
+
+- **Description**: Apply soft delete method.
+- **Response **: A JSON object containing details.
+
+### Update/bikes
+
+- **Description**: Update Bike Information and store it.
+- **Response **: A JSON object containing details.
+
+### POST/Orders
+
+- **Description**:create a new order based on logical scenario in Bike Model.
+- **Response**: An array of Order objects.
+
+### GET/Orders/revenue
+
+- **Description**:apply aggregation pipeline for Know total revenue from orders.
+- **Response**: An array of Order objects with total revenueR.

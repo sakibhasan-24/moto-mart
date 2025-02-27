@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { useGetProductsMutation } from "../productsApi";
+import {
+  useGetProductsMutation,
+  useSoftDeleteProductMutation,
+} from "../productsApi";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { FaEdit, FaTrash } from "react-icons/fa";
@@ -8,11 +11,20 @@ import { ClipLoader } from "react-spinners";
 export default function AdminProducts() {
   const [getProducts, { data: products, error, isLoading }] =
     useGetProductsMutation();
-  const [showAll, setShowAll] = useState(false); // Toggle state
+  const [softDeleteProduct, { isLoading: isDeleting }] =
+    useSoftDeleteProductMutation();
+  const [showAll, setShowAll] = useState(false);
+  const [productList, setProductList] = useState<any[]>([]);
 
   useEffect(() => {
     getProducts({ limit: 6 });
   }, [getProducts]);
+
+  useEffect(() => {
+    if (products?.data?.data) {
+      setProductList(products.data.data);
+    }
+  }, [products]);
 
   const handleShowAll = () => {
     if (!showAll) {
@@ -23,10 +35,23 @@ export default function AdminProducts() {
     setShowAll(!showAll);
   };
 
+  const handleSoftDelete = async (productId: string) => {
+    try {
+      await softDeleteProduct(productId).unwrap();
+      toast.success("Product soft deleted successfully!");
+
+      setProductList((prev) =>
+        prev.filter((product) => product._id !== productId)
+      );
+    } catch (err: any) {
+      toast.error(err?.data?.message || "Failed to delete product.");
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <ClipLoader size={50} color="#facc15" />{" "}
+        <ClipLoader size={50} color="#facc15" />
       </div>
     );
   }
@@ -58,12 +83,11 @@ export default function AdminProducts() {
             </tr>
           </thead>
 
-          {/* Table Body */}
           <tbody>
-            {products?.data?.data?.map((product: any, index: number) => (
+            {productList.map((product: any, index: number) => (
               <tr
                 key={product._id}
-                className={`transition-all duration-300  hover:shadow-xl hover:bg-gray-800 ${
+                className={`transition-all duration-300 hover:shadow-xl hover:bg-gray-800 ${
                   index % 2 === 0 ? "bg-gray-900" : "bg-gray-800"
                 }`}
               >
@@ -88,8 +112,18 @@ export default function AdminProducts() {
                     >
                       <FaEdit /> Edit
                     </Link>
-                    <button className="px-4 py-2 bg-red-500 text-white rounded-lg flex items-center gap-2 hover:bg-red-700 transition">
-                      <FaTrash /> Delete
+                    <button
+                      onClick={() => handleSoftDelete(product._id)}
+                      className="px-4 py-2 bg-red-500 text-white rounded-lg flex items-center gap-2 hover:bg-red-700 transition"
+                      disabled={isDeleting}
+                    >
+                      {isDeleting ? (
+                        "Deleting..."
+                      ) : (
+                        <>
+                          <FaTrash /> Delete
+                        </>
+                      )}
                     </button>
                   </div>
                 </td>

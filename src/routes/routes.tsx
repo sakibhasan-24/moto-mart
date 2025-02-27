@@ -14,6 +14,11 @@ import AdminProducts from "../redux/api/admin/AdminProducts";
 import AdminEditProducts from "../redux/api/admin/AdminEditProducts";
 import CartItems from "../pages/Cart/CartItems";
 import ConfirmOrder from "../pages/orderPlace/ConfirmOrder";
+import Payment from "../pages/payment/Payment";
+import OrderList from "../pages/dashboard/OrderList";
+import Users from "../pages/dashboard/Users";
+import AboutUs from "../pages/AboutUs";
+import SearchProducts from "../pages/search/SearchProducts";
 
 const router = createBrowserRouter([
   {
@@ -21,9 +26,9 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     errorElement: <h1>Something went Wrong</h1>,
     children: [
-      { path: "about", element: <h1>About</h1> },
+      { path: "/about", element: <AboutUs /> },
       { path: "/", element: <Home /> },
-      { path: "contact", element: <h1>Contact</h1> },
+      { path: "/all/products", element: <SearchProducts /> },
       {
         path: "/dashboard",
         element: (
@@ -37,6 +42,44 @@ const router = createBrowserRouter([
             element: (
               <ProtectedRoute>
                 <Profile />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "orders-list",
+            element: (
+              <ProtectedRoute>
+                <OrderList />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "users",
+            element: (
+              <ProtectedRoute>
+                <AdminRoute>
+                  <Users />
+                </AdminRoute>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "admin/products",
+            element: (
+              <ProtectedRoute>
+                <AdminRoute>
+                  <AdminProducts />
+                </AdminRoute>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "admin/create-product",
+            element: (
+              <ProtectedRoute>
+                <AdminRoute>
+                  <ProductCreate />
+                </AdminRoute>
               </ProtectedRoute>
             ),
           },
@@ -58,26 +101,7 @@ const router = createBrowserRouter([
         path: "/product/:id",
         element: <ProductDetails />,
       },
-      {
-        path: "/create-product",
-        element: (
-          <ProtectedRoute>
-            <AdminRoute>
-              <ProductCreate />
-            </AdminRoute>
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/admin/products",
-        element: (
-          <ProtectedRoute>
-            <AdminRoute>
-              <AdminProducts />
-            </AdminRoute>
-          </ProtectedRoute>
-        ),
-      },
+
       {
         path: "/cart-items",
         element: <CartItems />,
@@ -95,6 +119,11 @@ const router = createBrowserRouter([
       {
         path: "/confirm-order",
         element: <ConfirmOrder />,
+      },
+
+      {
+        path: "/payment",
+        element: <Payment />,
       },
     ],
   },

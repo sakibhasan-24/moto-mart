@@ -29,9 +29,9 @@ export default function Dashboard() {
           </Link>
 
           <Link
-            to="/dashboard/orders"
+            to="/dashboard/orders-list"
             className={`flex items-center p-3 rounded-lg transition ${
-              matchRouter("/dashboard/orders")
+              matchRouter("/dashboard/orders-list")
                 ? "bg-blue-600"
                 : "hover:bg-gray-700"
             }`}
@@ -54,9 +54,9 @@ export default function Dashboard() {
               </Link>
 
               <Link
-                to="/admin/products"
+                to="/dashboard/admin/products"
                 className={`flex items-center p-3 rounded-lg transition ${
-                  matchRouter("/dashboard/products")
+                  matchRouter("/dashboard/admin/products")
                     ? "bg-blue-600"
                     : "hover:bg-gray-700"
                 }`}
@@ -65,10 +65,10 @@ export default function Dashboard() {
               </Link>
 
               <Link
-                to="/create-product"
+                to="/dashboard/admin/create-product"
                 className={`flex items-center p-3 rounded-lg transition ${
-                  matchRouter("/dashboard/create-product")
-                    ? "bg-green-600"
+                  matchRouter("/dashboard/admin/create-product")
+                    ? "bg-blue-600"
                     : "hover:bg-gray-700"
                 }`}
               >

@@ -19,7 +19,6 @@ export default function CartItems() {
     (acc, item) => acc + item.totalPrice,
     0
   );
-
   // Apply discount if offer is claimed
   const discountAmount = claimed
     ? (overallTotalPrice * Number(offer)) / 100

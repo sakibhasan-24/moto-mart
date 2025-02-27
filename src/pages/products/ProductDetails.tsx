@@ -167,52 +167,6 @@ export default function ProductDetails() {
         </div>
 
         {/* Reviews Section */}
-        <div className="mt-10 bg-gray-900 p-6 rounded-lg shadow-md">
-          <h2 className="text-2xl font-bold mb-4">Customer Reviews</h2>
-
-          {product.data.reviews?.length > 0 ? (
-            <ul className="space-y-4">
-              {product.data.reviews.map((rev: any, index: number) => (
-                <li key={index} className="p-4 border-b border-gray-700">
-                  <Rate disabled defaultValue={rev.rating} />
-                  <p className="text-gray-400">{rev.comment}</p>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-gray-500">No reviews yet.</p>
-          )}
-
-          {/* Add Review Form */}
-          <div className="mt-6">
-            <h3 className="text-xl font-semibold">Leave a Review</h3>
-            <form className="mt-4 space-y-4">
-              <Input.TextArea
-                rows={3}
-                placeholder="Write your review..."
-                value={review}
-                onChange={(e) => setReview(e.target.value)}
-                required
-                className="bg-gray-700 text-white p-3 rounded-md"
-              />
-
-              <div className="flex items-center gap-4">
-                <label className="text-gray-300">Rating:</label>
-                <Rate value={rating} onChange={(value) => setRating(value)} />
-              </div>
-
-              <motion.button
-                whileTap={{ scale: 0.95 }}
-                className="w-full py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white text-lg font-semibold rounded-lg shadow-md hover:from-purple-600 hover:to-blue-600 transition-all"
-                onClick={() => {
-                  message.success("Review submitted!");
-                }}
-              >
-                Submit Review
-              </motion.button>
-            </form>
-          </div>
-        </div>
       </div>
     </div>
   );

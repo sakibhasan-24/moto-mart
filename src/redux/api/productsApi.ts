@@ -53,6 +53,14 @@ export const productApi = baseApi.injectEndpoints({
         },
       }),
     }),
+    softDeleteProduct: builder.mutation<{ message: string }, string>({
+      query: (productId) => ({
+        url: `/products/${productId}`,
+        method: "PATCH",
+        body: { isDelete: true },
+      }),
+      invalidatesTags: ["Product"],
+    }),
   }),
 });
 
@@ -60,6 +68,7 @@ export const {
   useGetProductsMutation,
   useGetProductByIdMutation,
   useAddProductMutation,
+  useSoftDeleteProductMutation,
   useUpdateProductMutation,
 } = productApi;
 export default productApi;

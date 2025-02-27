@@ -33,7 +33,7 @@ export default function Products() {
       </div>
       <div className="my-12 flex items-center justify-center">
         <Link
-          to="/search"
+          to="/all/products"
           className="bg-blue-800 text-xl font-semibold hover:bg-blue-500 p-4  rounded-md   w-[200px]  text-center   text-slate-100"
         >
           View More

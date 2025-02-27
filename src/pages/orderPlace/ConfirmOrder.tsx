@@ -1,13 +1,21 @@
-import { useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCreateOrderMutation } from "../../redux/api/orderApi";
+import { clearCart } from "../../redux/features/product.slice";
+import { toast } from "react-toastify";
 
 export default function ConfirmOrder() {
+  const navigate = useNavigate();
   const { cartItems } = useAppSelector((state) => state.items);
-  const { user } = useAppSelector((state) => state.auth);
+  const { user, token } = useAppSelector((state) => state.auth);
   const { offer, claimed } = useAppSelector((state) => state.offer);
 
+  const dispatch = useAppDispatch();
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+
+  const [createOrder, { isLoading: isOrderLoading }] = useCreateOrderMutation();
 
   const overallTotalPrice = cartItems.reduce(
     (acc, item) => acc + item.totalPrice,
@@ -20,21 +28,52 @@ export default function ConfirmOrder() {
 
   const isPhoneValid =
     phone.length === 11 && /^\d+$/.test(phone) && phone.startsWith("01");
-
   const isAddressValid = address.trim().length > 0;
-
   const isFormValid = isPhoneValid && isAddressValid;
+
+  const handleOrder = async () => {
+    if (!isFormValid) return;
+
+    try {
+      const orderData = {
+        email: user?.email || "user@example.com",
+        products: cartItems.map((item) => ({
+          product: item.id,
+          quantity: item.quantity,
+          price: item.price,
+        })),
+        totalPrice: finalPayableAmount,
+        phone,
+        address,
+        offer: claimed ? Number(offer) : 0,
+        paymentStatus: "Pending",
+        orderStatus: "Processing",
+      };
+
+      // Create Order
+      const response = await createOrder({ orderData, token }).unwrap();
+      // Clear the cart after successful order
+      dispatch(clearCart());
+      console.log("Order Success:", response);
+
+      // Redirect to payment page
+      navigate("/payment", { state: { order: response.order } });
+    } catch (error) {
+      toast.error("Prodcuts Not Found");
+      console.error("Order Failed:", error);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-900 to-gray-800 text-white">
-      <div className="bg-gray-800  border-gray-700 p-10 my-12 rounded-lg shadow-xl max-w-lg w-full transition-transform transform border-2 animate-border duration-300">
+      <div className="bg-gray-800 border-gray-700 p-10 my-12 rounded-lg shadow-xl max-w-lg w-full">
         <h1 className="text-3xl font-bold text-center mb-6 text-green-400">
           🛒 Confirm Your Order
         </h1>
 
+        {/* Order Summary */}
         <div className="bg-gray-700 p-5 rounded-lg shadow-md">
           <h2 className="text-lg font-semibold text-white">Order Summary</h2>
-
           <div className="flex justify-between mt-3">
             <span className="text-gray-300">Total Amount:</span>
             <span className="text-yellow-400 font-bold text-lg">
@@ -61,18 +100,18 @@ export default function ConfirmOrder() {
           </div>
         </div>
 
+        {/* User Email */}
         <div className="mt-6">
           <h2 className="text-lg font-semibold text-white">User Information</h2>
           <div className="bg-gray-700 p-4 rounded-lg mt-3">
             <p className="text-gray-300 flex justify-between">
               <span className="font-semibold text-white">Email:</span>
-              <span className="text-gray-400">
-                {user?.email || "user@example.com"}
-              </span>
+              <span className="text-gray-400">{user?.email || "N/A"}</span>
             </p>
           </div>
         </div>
 
+        {/* Phone Number */}
         <div className="mt-6">
           <h2 className="text-lg font-semibold text-white">Phone Number</h2>
           <input
@@ -82,13 +121,9 @@ export default function ConfirmOrder() {
             onChange={(e) => setPhone(e.target.value)}
             className="w-full p-3 mt-3 bg-gray-700 text-white rounded-lg outline-none border border-gray-600 focus:ring-2 focus:ring-green-400 transition-all"
           />
-          {!isPhoneValid && phone.length > 0 && (
-            <p className="text-red-400 text-sm mt-2">
-              Phone number must be **11 digits** and start with **"01"**.
-            </p>
-          )}
         </div>
 
+        {/* Address */}
         <div className="mt-6">
           <h2 className="text-lg font-semibold text-white">Address</h2>
           <textarea
@@ -97,33 +132,10 @@ export default function ConfirmOrder() {
             onChange={(e) => setAddress(e.target.value)}
             className="w-full p-3 mt-3 bg-gray-700 text-white rounded-lg outline-none border border-gray-600 focus:ring-2 focus:ring-green-400 transition-all"
           />
-          {!isAddressValid && address.length > 0 && (
-            <p className="text-red-400 text-sm mt-2">
-              Address cannot be empty.
-            </p>
-          )}
-        </div>
-
-        <div className="mt-6">
-          <h2 className="text-lg font-semibold text-white">Payment Method</h2>
-          <div className="bg-gray-700 p-4 rounded-lg mt-3 shadow-md">
-            <label className="flex items-center gap-3 text-gray-300">
-              <input
-                type="radio"
-                name="payment"
-                value="Online Payment"
-                checked
-                className="accent-green-500"
-                disabled
-              />
-              <span className="text-green-400 font-medium">
-                Online Payment (Required)
-              </span>
-            </label>
-          </div>
         </div>
 
         <button
+          onClick={handleOrder}
           className={`mt-8 text-lg w-full py-3 rounded-md shadow-lg transition-all transform hover:scale-105 ${
             isFormValid
               ? "bg-green-500 hover:bg-green-600 text-white"
@@ -131,7 +143,7 @@ export default function ConfirmOrder() {
           }`}
           disabled={!isFormValid}
         >
-          Place Order
+          {isOrderLoading ? "Processing..." : "Proceed to Payment"}
         </button>
       </div>
     </div>
