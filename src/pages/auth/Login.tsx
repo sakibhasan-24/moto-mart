@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { FaEnvelope, FaLock, FaSignInAlt } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaLock,
+  FaSignInAlt,
+  FaUser,
+  FaUserShield,
+} from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useLoginMutation } from "../../redux/api/authApi";
@@ -23,6 +29,7 @@ export default function Login() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const [active, setActive] = useState("");
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -62,6 +69,43 @@ export default function Login() {
           Login
         </h2>
 
+        <div className="flex justify-between my-4 gap-1">
+          <button
+            type="button"
+            onClick={() => {
+              setFormData({
+                email: "adminTwo@gmail.com",
+                password: "123456",
+              });
+              setActive("admin");
+            }}
+            className={`flex items-center gap-2 text-xs px-3 py-1 rounded-md transition duration-200 ${
+              active === "admin"
+                ? "bg-blue-700 text-white border-2 border-cyan-400 animate-border p-2"
+                : "bg-blue-600 hover:bg-blue-700 text-white"
+            }`}
+          >
+            <FaUserShield className="text-sm" />
+            Admin Credentials
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setFormData({ email: "user1@gmail.com", password: "12345678" });
+              setActive("user");
+            }}
+            className={`flex items-center gap-2 text-xs px-3 py-1 rounded-md transition duration-200 ${
+              active === "user"
+                ? "bg-green-700 text-white border-2 border-green-400 animate-border p-2"
+                : "bg-green-600 hover:bg-green-700 text-white"
+            }`}
+          >
+            <FaUser className="text-sm" />
+            User Credentials
+          </button>
+        </div>
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex items-center border-b border-gray-500 py-2">
             <FaEnvelope className="text-gray-400 mr-3" />
@@ -97,12 +141,6 @@ export default function Login() {
         </form>
 
         <div className="mt-4 text-center text-gray-400">
-          <Link
-            to="/forgot-password"
-            className="block hover:underline text-blue-400"
-          >
-            Forgot Password?
-          </Link>
           <p className="mt-2">
             Don't have an account?{" "}
             <Link to="/auth/signup" className="text-blue-400 hover:underline">
