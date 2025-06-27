@@ -4,7 +4,7 @@ import Badge from "./Badge";
 
 export default function Banner() {
   return (
-    <div className="relative w-full h-screen flex items-center justify-center bg-black">
+    <div className="relative w-full mt-2 h-screen flex items-center justify-center bg-black">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{

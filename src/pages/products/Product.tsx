@@ -39,7 +39,7 @@ export default function ProductCard({ product }: any) {
               : "bg-red-500 text-white"
           } backdrop-blur-md`}
         >
-          {product.inStock ? "In Stock" : "Out of Stock"}
+          {product.quantity > 0 ? "In Stock" : "Out of Stock"}
         </motion.div>
       </div>
 
