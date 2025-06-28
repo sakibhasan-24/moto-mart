@@ -105,13 +105,9 @@ export default function RestItems() {
           Accessories
         </Link>
       </li>
+
       <li>
-        <Link to="/services" className="text-yellow-400 hover:text-yellow-300">
-          Services
-        </Link>
-      </li>
-      <li>
-        <Link to="/blog" className="text-pink-400 hover:text-pink-300">
+        <Link to="/blogs" className="text-pink-400 hover:text-pink-300">
           Blog
         </Link>
       </li>

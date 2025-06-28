@@ -20,6 +20,8 @@ import Users from "../pages/dashboard/Users";
 import AboutUs from "../pages/AboutUs";
 import SearchProducts from "../pages/search/SearchProducts";
 import Contact from "../pages/contact/Contact";
+import Blogs from "../pages/blogs/Blogs";
+import BlogDetails from "../pages/blogs/BlogDetails";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,8 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/all/products", element: <SearchProducts /> },
       { path: "/contact", element: <Contact /> },
+      { path: "/blogs", element: <Blogs /> },
+      { path: "/blog/:id", element: <BlogDetails /> },
       {
         path: "/dashboard",
         element: (
