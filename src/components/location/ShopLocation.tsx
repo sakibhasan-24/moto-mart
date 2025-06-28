@@ -17,6 +17,8 @@ const locations = [
     country: "USA",
     brand: "Yamaha Showroom",
     city: "Los Angeles",
+    email: "contact@yamaha-usa.com",
+    phone: "+1 555-1234",
     lat: 34.0522,
     lng: -118.2437,
   },
@@ -24,6 +26,8 @@ const locations = [
     country: "UK",
     brand: "Kawasaki Dealer",
     city: "London",
+    email: "info@kawasaki-uk.co.uk",
+    phone: "+44 20 7946 0123",
     lat: 51.5074,
     lng: -0.1278,
   },
@@ -31,6 +35,8 @@ const locations = [
     country: "India",
     brand: "Honda Bikes",
     city: "New Delhi",
+    email: "support@honda.in",
+    phone: "+91 11 2345 6789",
     lat: 28.6139,
     lng: 77.209,
   },
@@ -38,6 +44,8 @@ const locations = [
     country: "Germany",
     brand: "BMW Motorrad",
     city: "Berlin",
+    email: "service@bmw-motorrad.de",
+    phone: "+49 30 123456",
     lat: 52.52,
     lng: 13.405,
   },
@@ -45,6 +53,8 @@ const locations = [
     country: "Canada",
     brand: "Suzuki Center",
     city: "Toronto",
+    email: "contact@suzuki.ca",
+    phone: "+1 416-555-7890",
     lat: 43.65107,
     lng: -79.347015,
   },
@@ -52,6 +62,8 @@ const locations = [
     country: "Japan",
     brand: "Yamaha HQ",
     city: "Iwata",
+    email: "hq@yamaha.co.jp",
+    phone: "+81 538 37 1234",
     lat: 34.7108,
     lng: 137.726,
   },
@@ -98,6 +110,20 @@ export default function MotoMartMap() {
                 <strong>{loc.brand}</strong>
                 <br />
                 {loc.city}, {loc.country}
+                <br />
+                <a
+                  href={`mailto:${loc.email}`}
+                  className="text-cyan-400 underline"
+                >
+                  {loc.email}
+                </a>
+                <br />
+                <a
+                  href={`tel:${loc.phone}`}
+                  className="text-cyan-400 underline"
+                >
+                  {loc.phone}
+                </a>
               </Popup>
             </Marker>
           ))}
