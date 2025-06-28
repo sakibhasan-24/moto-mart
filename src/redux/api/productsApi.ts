@@ -13,9 +13,17 @@ export const productApi = baseApi.injectEndpoints({
         searchTerm?: string;
         minPrice?: number;
         maxPrice?: number;
+        category: string;
       }
     >({
-      query: ({ page = 1, limit = 3, searchTerm, minPrice, maxPrice }) => {
+      query: ({
+        page = 1,
+        limit = 3,
+        searchTerm,
+        minPrice,
+        maxPrice,
+        category,
+      }) => {
         const params = new URLSearchParams();
 
         if (page) params.append("page", page.toString());
@@ -23,6 +31,7 @@ export const productApi = baseApi.injectEndpoints({
         if (searchTerm) params.append("searchTerm", searchTerm);
         if (minPrice) params.append("minPrice", minPrice.toString());
         if (maxPrice) params.append("maxPrice", maxPrice.toString());
+        if (category) params.append("category", category);
 
         return {
           url: `/products?${params.toString()}`,

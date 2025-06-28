@@ -1,4 +1,5 @@
 import Banner from "../../components/banner/Banner";
+import Categories from "../../components/categories/Categories";
 import Products from "../products/Products";
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <div>
       <Banner />
       <Products />
+      <Categories />
     </div>
   );
 }

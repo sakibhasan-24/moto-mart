@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import HeaderText from "../NavbarLogo/HeaderText";
 import Badge from "./Badge";
+import { Link } from "react-router-dom";
 
 export default function Banner() {
   return (
-    <div className="relative w-full mt-2 h-screen flex items-center justify-center bg-black">
+    <div className="relative w-full mt-2 h-[70vh] flex items-center justify-center bg-black">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -37,13 +38,15 @@ export default function Banner() {
         </motion.p>
         <Badge />
 
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="mt-6 px-8 py-3 border-2 animate-border cursor-pointer  transition rounded-lg text-white font-bold shadow-lg "
-        >
-          Explore Bikes
-        </motion.button>
+        <Link to="/all/products">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="mt-6 px-8 py-3 border-2 animate-border cursor-pointer  transition rounded-lg text-white font-bold shadow-lg "
+          >
+            Explore Bikes
+          </motion.button>
+        </Link>
       </div>
     </div>
   );

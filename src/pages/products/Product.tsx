@@ -3,6 +3,7 @@ import { FaSadTear } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export default function ProductCard({ product }: any) {
+  // console.log(product);
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}

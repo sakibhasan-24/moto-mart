@@ -16,6 +16,7 @@ export default function Products() {
       searchTerm: "",
       minPrice: 0,
       maxPrice: 0,
+      category: "",
     });
   }, [getProducts]);
   const products = data?.data?.data || [];
