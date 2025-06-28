@@ -14,6 +14,7 @@ export const productApi = baseApi.injectEndpoints({
         minPrice?: number;
         maxPrice?: number;
         category: string;
+        sortBy?: string;
       }
     >({
       query: ({
@@ -23,6 +24,7 @@ export const productApi = baseApi.injectEndpoints({
         minPrice,
         maxPrice,
         category,
+        sortBy,
       }) => {
         const params = new URLSearchParams();
 
@@ -32,6 +34,7 @@ export const productApi = baseApi.injectEndpoints({
         if (minPrice) params.append("minPrice", minPrice.toString());
         if (maxPrice) params.append("maxPrice", maxPrice.toString());
         if (category) params.append("category", category);
+        if (sortBy) params.append("sortBy", sortBy);
 
         return {
           url: `/products?${params.toString()}`,
