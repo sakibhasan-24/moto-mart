@@ -121,7 +121,6 @@ export default function RestItems() {
         </Link>
       </li>
 
-      {/* ✅ Auth */}
       {user ? (
         <div className="relative">
           <button
