@@ -1,34 +1,54 @@
 import { motion } from "framer-motion";
 import emailjs from "emailjs-com";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Brain, Github, Linkedin, Mail } from "lucide-react";
 
 export default function Contact() {
-  const formRef = useRef(null);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    title: "",
+    message: "",
+  });
+
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setSent(false);
     setError("");
 
+    const payload = {
+      ...form,
+      time: new Date().toLocaleString(),
+    };
+
     emailjs
-      .sendForm(
-        import.meta.env.VITE_TID,
+      .send(
         import.meta.env.VITE_SID,
-        formRef.current!,
+        import.meta.env.VITE_TID,
+        payload,
         import.meta.env.VITE_EM
       )
       .then(
-        () => {
+        (response) => {
+          console.log("SUCCESS!", response.status, response.text);
           setSent(true);
           setLoading(false);
         },
-        () => {
-          setError(" Failed to send message. Please try again.");
+        (error) => {
+          console.log("FAILED...", error);
+          setError("❌ Failed to send message. Please try again.");
           setLoading(false);
         }
       );
@@ -53,10 +73,8 @@ export default function Contact() {
       </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-        {/* Form */}
         <motion.form
-          ref={formRef}
-          onSubmit={sendEmail}
+          onSubmit={handleSubmit}
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
@@ -64,23 +82,38 @@ export default function Contact() {
         >
           <input
             type="text"
-            name="user_name"
+            name="name"
             placeholder="Your Name"
             required
+            value={form.name}
+            onChange={handleChange}
             className="w-full p-3 rounded-md bg-gray-800 border border-gray-700 text-white focus:ring-2 focus:ring-cyan-500 outline-none transition"
           />
           <input
             type="email"
-            name="user_email"
+            name="email"
             placeholder="you@example.com"
             required
+            value={form.email}
+            onChange={handleChange}
+            className="w-full p-3 rounded-md bg-gray-800 border border-gray-700 text-white focus:ring-2 focus:ring-cyan-500 outline-none transition"
+          />
+          <input
+            type="text"
+            name="title"
+            placeholder="Subject Title"
+            required
+            value={form.title}
+            onChange={handleChange}
             className="w-full p-3 rounded-md bg-gray-800 border border-gray-700 text-white focus:ring-2 focus:ring-cyan-500 outline-none transition"
           />
           <textarea
             name="message"
             rows={5}
-            placeholder="Your Message... i am waiting.."
+            placeholder="Your message..."
             required
+            value={form.message}
+            onChange={handleChange}
             className="w-full p-3 rounded-md bg-gray-800 border border-gray-700 text-white focus:ring-2 focus:ring-cyan-500 outline-none transition"
           />
           <button
@@ -90,9 +123,10 @@ export default function Contact() {
           >
             {loading ? "Sending..." : "Send Message"}
           </button>
+
           {sent && (
             <p className="text-green-400 text-sm text-center mt-2">
-              Your message has been sent successfully!
+              ✅ Your message has been sent successfully!
             </p>
           )}
           {error && (
@@ -100,7 +134,6 @@ export default function Contact() {
           )}
         </motion.form>
 
-        {/* Social Links */}
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -113,7 +146,6 @@ export default function Contact() {
               I’m available on these platforms. Let’s build something amazing!
             </p>
           </div>
-
           <div className="flex gap-6 text-cyan-400 text-3xl">
             <a
               href="https://github.com/sakibhasan-24"
