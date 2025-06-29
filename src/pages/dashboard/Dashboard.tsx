@@ -16,14 +16,14 @@ export default function Dashboard() {
   const isAdmin = user?.role === "admin";
 
   return (
-    <div className="flex flex-col sm:flex-row min-h-screen bg-gray-900 text-white">
+    <div className="flex flex-col sm:flex-row min-h-screen  text-white">
       {/* Sidebar */}
-      <div className="w-64 sm:bg-gray-800 p-6">
-        <h2 className="text-xl hidden sm:block font-semibold mb-4">
+      <div className="w-full sm:w-64 sm:bg-gray-800 p-6">
+        <h2 className="text-xl hidden sm:block  font-semibold mb-4">
           Dashboard
         </h2>
 
-        <nav className="space-y-3 flex flex-row flex-wrap gap-6 sm:flex-col mx-auto sm:mx-0">
+        <nav className="space-y-3 flex  flex-wrap gap-6 sm:flex-col mx-auto sm:mx-0">
           <Link
             to="/dashboard/change-pass"
             className={`flex items-center p-3 rounded-lg transition ${

@@ -1,5 +1,4 @@
 // @ts-nocheck
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useAddProductMutation } from "../productsApi";
@@ -60,10 +59,7 @@ export default function BikeCreate() {
     formDataToSend.append("inStock", formData.inStock.toString());
 
     try {
-      await addProduct({
-        formData: formDataToSend,
-        token,
-      }).unwrap();
+      await addProduct({ formData: formDataToSend, token }).unwrap();
       toast.success("Bike added successfully!");
     } catch (error) {
       console.error("Error adding bike:", error);
@@ -72,9 +68,9 @@ export default function BikeCreate() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white p-6">
-      <div className="w-full max-w-3xl bg-gray-800/50 backdrop-blur-md p-8 rounded-xl shadow-lg border border-gray-700">
-        <h2 className="text-4xl font-bold text-center text-yellow-400 mb-8">
+    <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white p-4 sm:p-6 md:p-8">
+      <div className="w-full max-w-3xl bg-gray-800/50 backdrop-blur-md p-4 sm:p-6 md:p-8 rounded-xl shadow-lg border border-gray-700">
+        <h2 className="text-3xl sm:text-4xl font-bold text-center text-yellow-400 mb-8">
           🏍️ Add a New Bike
         </h2>
 
@@ -144,7 +140,7 @@ export default function BikeCreate() {
               required
             />
             {errors.price && (
-              <p className="text-red-400 text-sm">{errors.price}</p>
+              <p className="text-red-400 text-sm break-words">{errors.price}</p>
             )}
           </div>
 
@@ -161,7 +157,9 @@ export default function BikeCreate() {
               required
             />
             {errors.quantity && (
-              <p className="text-red-400 text-sm">{errors.quantity}</p>
+              <p className="text-red-400 text-sm break-words">
+                {errors.quantity}
+              </p>
             )}
           </div>
 
@@ -172,7 +170,7 @@ export default function BikeCreate() {
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              className="w-full mt-2 p-2 rounded-lg bg-gray-800/50 text-white border border-gray-600 focus:border-yellow-500 focus:outline-none"
+              className="w-full mt-2 p-2 rounded-lg bg-gray-800/50 text-white border border-gray-600 focus:border-yellow-500 focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-yellow-500 file:text-black hover:file:bg-yellow-600"
               required
             />
           </div>
@@ -184,19 +182,19 @@ export default function BikeCreate() {
               name="description"
               value={formData.description}
               onChange={handleChange}
-              className="w-full mt-2 p-3 h-32 rounded-lg bg-gray-800/50 text-white border border-gray-600 focus:border-yellow-500 focus:outline-none"
+              className="w-full mt-2 p-3 h-32 min-h-[6rem] md:h-40 rounded-lg bg-gray-800/50 text-white border border-gray-600 focus:border-yellow-500 focus:outline-none"
               placeholder="Enter bike description"
               required
             />
           </div>
 
-          {/* Submit Button with Loader */}
+          {/* Submit Button */}
           <div className="col-span-2">
             <motion.button
               type="submit"
               whileHover={{ scale: isLoading ? 1 : 1.05 }}
               whileTap={{ scale: isLoading ? 1 : 0.95 }}
-              className={`w-full py-3 text-black text-lg font-semibold rounded-lg shadow-md transition-all
+              className={`w-full py-3 text-base sm:text-lg text-black font-semibold rounded-lg shadow-md transition-all
                 ${
                   isLoading
                     ? "bg-gray-600 cursor-not-allowed"
