@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useGetProductsMutation } from "../../redux/api/productsApi"; // RTK mutation hook
 import Product from "../../pages/products/Product";
-import { Link } from "react-router-dom";
-import { Skeleton } from "antd";
+
 import ProductSkeleton from "../skeleton/Skeleton";
 import ViewMore from "../shared-button/ViewMore";
 

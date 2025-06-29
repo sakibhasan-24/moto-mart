@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import emailjs from "emailjs-com";
 import { useRef, useState } from "react";
 import { Brain, Github, Linkedin, Mail } from "lucide-react";
-import { FaIdeal } from "react-icons/fa";
 
 export default function Contact() {
   const formRef = useRef(null);
