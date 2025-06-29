@@ -28,7 +28,7 @@ export default function ProfileOverView() {
     }
 
     try {
-      const res = await updateProfile({ token, profile: formData }).unwrap();
+      await updateProfile({ token, profile: formData }).unwrap();
       toast.success("Profile updated successfully!");
 
       const updatedUser = { ...user, ...formData };

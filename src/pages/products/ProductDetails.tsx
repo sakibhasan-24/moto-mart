@@ -6,7 +6,7 @@ import {
 } from "../../redux/api/productsApi";
 import { toast, ToastContainer } from "react-toastify";
 import { motion } from "framer-motion";
-import Loader from "../../components/loader/Loader";
+// import Loader from "../../components/loader/Loader";
 import { Button, Modal, Rate } from "antd";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
