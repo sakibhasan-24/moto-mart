@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
 type MegaMenuProps = {
   isOpen: boolean;
@@ -50,14 +51,15 @@ export default function MegaMenu({ isOpen, onClose }: MegaMenuProps) {
                 <h3 className="text-xl font-semibold mb-4 text-pink-400 border-b border-pink-400 pb-2">
                   🏍️ By Brand
                 </h3>
-                <ul className="space-y-2 text-lg">
+                <ul className="space-y-2 text-lg grid ">
                   {["Honda", "Yamaha", "Suzuki"].map((brand) => (
-                    <li
+                    <Link
+                      to={`/search/${brand}`}
                       key={brand}
                       className="cursor-pointer hover:text-cyan-400 hover:translate-x-2 transition-transform duration-300"
                     >
                       {brand}
-                    </li>
+                    </Link>
                   ))}
                 </ul>
               </div>
@@ -67,14 +69,15 @@ export default function MegaMenu({ isOpen, onClose }: MegaMenuProps) {
                 <h3 className="text-xl font-semibold mb-4 text-green-400 border-b border-green-400 pb-2">
                   ⚙️ By Engine
                 </h3>
-                <ul className="space-y-2 text-lg">
+                <ul className="space-y-2 text-lg grid">
                   {["100cc", "150cc", "200cc+"].map((engine) => (
-                    <li
+                    <Link
+                      to={`/search/${engine}`}
                       key={engine}
                       className="cursor-pointer hover:text-cyan-400 hover:translate-x-2 transition-transform duration-300"
                     >
                       {engine}
-                    </li>
+                    </Link>
                   ))}
                 </ul>
               </div>
@@ -84,14 +87,15 @@ export default function MegaMenu({ isOpen, onClose }: MegaMenuProps) {
                 <h3 className="text-xl font-semibold mb-4 text-yellow-400 border-b border-yellow-400 pb-2">
                   🧤 Accessories
                 </h3>
-                <ul className="space-y-2 text-lg">
+                <ul className="space-y-2 text-lg grid">
                   {["Helmet", "Gloves", "Engine Oil"].map((item) => (
-                    <li
+                    <Link
+                      to={`/all/products/${item}`}
                       key={item}
                       className="cursor-pointer hover:text-cyan-400 hover:translate-x-2 transition-transform duration-300"
                     >
                       {item}
-                    </li>
+                    </Link>
                   ))}
                 </ul>
               </div>

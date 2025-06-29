@@ -13,8 +13,9 @@ export const productApi = baseApi.injectEndpoints({
         searchTerm?: string;
         minPrice?: number;
         maxPrice?: number;
-        category: string;
+        category?: string;
         sortBy?: string;
+        brand?: string;
       }
     >({
       query: ({
@@ -25,6 +26,7 @@ export const productApi = baseApi.injectEndpoints({
         maxPrice,
         category,
         sortBy,
+        brand,
       }) => {
         const params = new URLSearchParams();
 
@@ -35,6 +37,7 @@ export const productApi = baseApi.injectEndpoints({
         if (maxPrice) params.append("maxPrice", maxPrice.toString());
         if (category) params.append("category", category);
         if (sortBy) params.append("sortBy", sortBy);
+        if (brand) params.append("brand", brand);
 
         return {
           url: `/products?${params.toString()}`,
@@ -73,6 +76,26 @@ export const productApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Product"] as any,
     }),
+    // addOrUpdateReview: builder.mutation({
+    //   query: ({ productId, user, rating, text, token }) => ({
+    //     url: `/add-review/${productId}`,
+    //     method: "PUT",
+    //     body: { user, rating, text, productId },
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   }),
+    // }),
+    addOrUpdateReview: builder.mutation({
+      query: ({ productId, userId, rating, text, token }) => ({
+        url: `/add-review/${productId}`,
+        method: "PUT",
+        body: { userId, rating, text },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    }),
   }),
 });
 
@@ -82,5 +105,6 @@ export const {
   useAddProductMutation,
   useSoftDeleteProductMutation,
   useUpdateProductMutation,
+  useAddOrUpdateReviewMutation,
 } = productApi;
 export default productApi;

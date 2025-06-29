@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function CartIcon() {
   const { cartItems } = useAppSelector((state) => state.items);
-  console.log(cartItems);
+  console.log("cartItems", cartItems);
   // const [cartCount, setCartCount] = useState(1);
   return (
     <Link to="/cart-items" className="cursor-pointer ">

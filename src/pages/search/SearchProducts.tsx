@@ -25,11 +25,12 @@ export default function SearchProducts() {
         page,
         limit,
       } as any);
-    }, 300); // Debounce API calls
+    }, 100);
 
     return () => clearTimeout(delayFetch);
   }, [searchTerm, minPrice, maxPrice, sortBy, page, getProducts]);
 
+  console.log(searchTerm);
   return (
     <div className="max-w-6xl mx-auto mt-10 p-6 bg-gray-900 text-white rounded-xl shadow-lg">
       <h2 className="text-3xl font-bold text-yellow-400 text-center mb-6">
