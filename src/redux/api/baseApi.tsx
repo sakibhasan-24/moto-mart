@@ -9,5 +9,3 @@ export const baseApi = createApi({
   }),
   endpoints: (builder) => ({}),
 });
-
-// //moto-gamma.vercel.app/api
