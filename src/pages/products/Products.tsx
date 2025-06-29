@@ -3,8 +3,7 @@ import React, { useEffect } from "react";
 import { useGetProductsMutation } from "../../redux/api/productsApi";
 import Product from "./Product";
 import HeaderText from "../../components/NavbarLogo/HeaderText";
-import { Link } from "react-router-dom";
-import Loader from "../../components/loader/Loader";
+
 import ViewMore from "../../components/shared-button/ViewMore";
 import ProductSkeleton from "../../components/skeleton/Skeleton";
 

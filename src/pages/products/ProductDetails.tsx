@@ -17,7 +17,7 @@ export default function ProductDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [getProductById, { data: product, isLoading, error, refetch }] =
+  const [getProductById, { data: product, isLoading, error }] =
     useGetProductByIdMutation();
   const [addOrUpdateReview, { isLoading: reviewLoading }] =
     useAddOrUpdateReviewMutation();
@@ -95,8 +95,7 @@ export default function ProductDetails() {
       closeModal();
 
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      if (refetch) refetch();
-      const updated = await getProductById(id).unwrap();
+      const updated = await getProductById(id as string).unwrap();
       product.data = updated.data;
     } catch (err: any) {
       toast.error(err?.data?.message || "Failed to submit review");
