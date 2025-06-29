@@ -22,17 +22,22 @@ import SearchProducts from "../pages/search/SearchProducts";
 import Contact from "../pages/contact/Contact";
 import Blogs from "../pages/blogs/Blogs";
 import BlogDetails from "../pages/blogs/BlogDetails";
+import ProfileOverView from "../pages/dashboard/ProfileOverView";
+import Summary from "../pages/dashboard/Summary";
+import Accessories from "../pages/accessories/Accessories";
+import Error from "../pages/error/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement: <h1>Something went Wrong</h1>,
+    errorElement: <Error />,
     children: [
       { path: "/about", element: <AboutUs /> },
       { path: "/", element: <Home /> },
       { path: "/all/products", element: <SearchProducts /> },
       { path: "/contact", element: <Contact /> },
+      { path: "/accessories", element: <Accessories /> },
       { path: "/blogs", element: <Blogs /> },
       { path: "/blog/:id", element: <BlogDetails /> },
       {
@@ -44,10 +49,18 @@ const router = createBrowserRouter([
         ),
         children: [
           {
-            path: "profile",
+            path: "change-pass",
             element: (
               <ProtectedRoute>
                 <Profile />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "profile",
+            element: (
+              <ProtectedRoute>
+                <ProfileOverView />
               </ProtectedRoute>
             ),
           },
@@ -65,6 +78,16 @@ const router = createBrowserRouter([
               <ProtectedRoute>
                 <AdminRoute>
                   <Users />
+                </AdminRoute>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "stat",
+            element: (
+              <ProtectedRoute>
+                <AdminRoute>
+                  <Summary />
                 </AdminRoute>
               </ProtectedRoute>
             ),

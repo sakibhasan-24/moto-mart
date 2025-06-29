@@ -34,12 +34,7 @@ export default function Footer() {
                 whileHover={{ scale: 1.1 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <Link
-                  to={`/${link.toLowerCase().replace(" ", "-")}`}
-                  className="text-gray-400 hover:text-yellow-400"
-                >
-                  {link}
-                </Link>
+                <p className="text-gray-400 ">{link}</p>
               </motion.li>
             ))}
           </ul>

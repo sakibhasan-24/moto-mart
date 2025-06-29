@@ -6,6 +6,7 @@ import HeaderText from "../../components/NavbarLogo/HeaderText";
 import { Link } from "react-router-dom";
 import Loader from "../../components/loader/Loader";
 import ViewMore from "../../components/shared-button/ViewMore";
+import ProductSkeleton from "../../components/skeleton/Skeleton";
 
 export default function Products() {
   const [getProducts, { data, isLoading, error }] = useGetProductsMutation();
@@ -22,7 +23,7 @@ export default function Products() {
   }, [getProducts]);
   const products = data?.data?.data || [];
   console.log(products);
-  if (isLoading) return <Loader />;
+  if (isLoading) return <ProductSkeleton />;
   if (error) return <p>Error occurred: {JSON.stringify(error)}</p>;
 
   return (

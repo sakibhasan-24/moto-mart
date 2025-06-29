@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import emailjs from "emailjs-com";
 import { useRef, useState } from "react";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Brain, Github, Linkedin, Mail } from "lucide-react";
+import { FaIdeal } from "react-icons/fa";
 
 export default function Contact() {
   const formRef = useRef(null);
@@ -28,7 +29,7 @@ export default function Contact() {
           setLoading(false);
         },
         () => {
-          setError("❌ Failed to send message. Please try again.");
+          setError(" Failed to send message. Please try again.");
           setLoading(false);
         }
       );
@@ -36,7 +37,6 @@ export default function Contact() {
 
   return (
     <section className="bg-gray-950 text-white py-20 px-4 sm:px-8 lg:px-16">
-      {/* Header */}
       <motion.div
         className="text-center mb-12"
         initial={{ opacity: 0, y: 30 }}
@@ -80,7 +80,7 @@ export default function Contact() {
           <textarea
             name="message"
             rows={5}
-            placeholder="Your Message..."
+            placeholder="Your Message... i am waiting.."
             required
             className="w-full p-3 rounded-md bg-gray-800 border border-gray-700 text-white focus:ring-2 focus:ring-cyan-500 outline-none transition"
           />
@@ -93,7 +93,7 @@ export default function Contact() {
           </button>
           {sent && (
             <p className="text-green-400 text-sm text-center mt-2">
-              ✅ Your message has been sent successfully!
+              Your message has been sent successfully!
             </p>
           )}
           {error && (
@@ -117,7 +117,7 @@ export default function Contact() {
 
           <div className="flex gap-6 text-cyan-400 text-3xl">
             <a
-              href="https://github.com/yourusername"
+              href="https://github.com/sakibhasan-24"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white transition"
@@ -126,7 +126,16 @@ export default function Contact() {
               <Github />
             </a>
             <a
-              href="https://linkedin.com/in/yourprofile"
+              href="https://leetcode.com/u/sakibHasan28/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition"
+              title="Leetcode"
+            >
+              <Brain />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/sakib-hasan-0b7a821a5/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white transition"

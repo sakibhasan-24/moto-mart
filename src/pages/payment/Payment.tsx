@@ -99,7 +99,6 @@ export default function Payment() {
       if (paymentIntent.status === "succeeded") {
         console.log("Payment successful, transaction ID:", paymentIntent.id);
 
-        // ✅ Send transactionId to backend
         await processPayment({
           orderId: order._id,
 
@@ -107,7 +106,6 @@ export default function Payment() {
           token,
         }).unwrap();
 
-        // ✅ Show Beautiful Success Alert
         Swal.fire({
           title: "Payment Successful!",
           text: `Transaction ID: ${paymentIntent.id}`,

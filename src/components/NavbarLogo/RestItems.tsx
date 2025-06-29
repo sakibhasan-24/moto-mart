@@ -93,7 +93,7 @@ export default function RestItems() {
   return (
     <ul className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-6 text-sm sm:text-base font-semibold items-center">
       <li>
-        <Link to="/bikes" className="text-cyan-400 hover:text-cyan-300">
+        <Link to="/all/products" className="text-cyan-400 hover:text-cyan-300">
           All Bikes
         </Link>
       </li>
@@ -128,7 +128,7 @@ export default function RestItems() {
           {isDropdownOpen && (
             <div className="absolute right-0 mt-2 w-40 bg-gray-900 text-white shadow-lg rounded-lg z-50">
               <Link
-                to="/dashboard/profile"
+                to="/dashboard/change-pass"
                 className="flex items-center px-4 py-2 hover:bg-gray-800"
               >
                 <FiGrid className="mr-2" /> Dashboard

@@ -11,6 +11,7 @@ import { Button, Modal, Rate } from "antd";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/features/product.slice";
+import ProductSkeleton from "../../components/skeleton/Skeleton";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -148,7 +149,7 @@ export default function ProductDetails() {
   if (isLoading)
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black to-gray-900 text-white">
-        <Loader />
+        <ProductSkeleton />
       </div>
     );
 

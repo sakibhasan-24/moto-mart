@@ -1,5 +1,12 @@
 import { Link, Outlet } from "react-router-dom";
-import { FaUser, FaShoppingBag, FaBoxes, FaPlus } from "react-icons/fa";
+import {
+  FaUser,
+  FaShoppingBag,
+  FaBoxes,
+  FaPlus,
+  FaLock,
+  FaBarcode,
+} from "react-icons/fa";
 import matchRouter from "../../utils/matchRouter";
 import { useAppSelector } from "../../redux/hooks";
 
@@ -18,6 +25,16 @@ export default function Dashboard() {
 
         <nav className="space-y-3 flex flex-row flex-wrap gap-6 sm:flex-col mx-auto sm:mx-0">
           <Link
+            to="/dashboard/change-pass"
+            className={`flex items-center p-3 rounded-lg transition ${
+              matchRouter("/dashboard/change-pass")
+                ? "bg-blue-600"
+                : "hover:bg-gray-700"
+            }`}
+          >
+            <FaLock className="mr-2" /> change Password
+          </Link>
+          <Link
             to="/dashboard/profile"
             className={`flex items-center p-3 rounded-lg transition ${
               matchRouter("/dashboard/profile")
@@ -25,7 +42,7 @@ export default function Dashboard() {
                 : "hover:bg-gray-700"
             }`}
           >
-            <FaUser className="mr-2" /> Profile
+            <FaUser className="mr-2" /> profile
           </Link>
 
           <Link
@@ -42,6 +59,16 @@ export default function Dashboard() {
           {/* Admin Links */}
           {isAdmin && (
             <>
+              <Link
+                to="/dashboard/stat"
+                className={`flex items-center p-3 rounded-lg transition ${
+                  matchRouter("/dashboard/stat")
+                    ? "bg-blue-600"
+                    : "hover:bg-gray-700"
+                }`}
+              >
+                <FaBarcode className="mr-2" /> Statics
+              </Link>
               <Link
                 to="/dashboard/users"
                 className={`flex items-center p-3 rounded-lg transition ${

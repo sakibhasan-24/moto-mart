@@ -46,7 +46,6 @@ export default function MegaMenu({ isOpen, onClose }: MegaMenuProps) {
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 text-white">
-              {/* By Brand */}
               <div>
                 <h3 className="text-xl font-semibold mb-4 text-pink-400 border-b border-pink-400 pb-2">
                   🏍️ By Brand
@@ -54,7 +53,7 @@ export default function MegaMenu({ isOpen, onClose }: MegaMenuProps) {
                 <ul className="space-y-2 text-lg grid ">
                   {["Honda", "Yamaha", "Suzuki"].map((brand) => (
                     <Link
-                      to={`/search/${brand}`}
+                      to={`/all/products`}
                       key={brand}
                       className="cursor-pointer hover:text-cyan-400 hover:translate-x-2 transition-transform duration-300"
                     >
@@ -64,7 +63,6 @@ export default function MegaMenu({ isOpen, onClose }: MegaMenuProps) {
                 </ul>
               </div>
 
-              {/* By Engine */}
               <div>
                 <h3 className="text-xl font-semibold mb-4 text-green-400 border-b border-green-400 pb-2">
                   ⚙️ By Engine
@@ -72,7 +70,7 @@ export default function MegaMenu({ isOpen, onClose }: MegaMenuProps) {
                 <ul className="space-y-2 text-lg grid">
                   {["100cc", "150cc", "200cc+"].map((engine) => (
                     <Link
-                      to={`/search/${engine}`}
+                      to={`/all/products`}
                       key={engine}
                       className="cursor-pointer hover:text-cyan-400 hover:translate-x-2 transition-transform duration-300"
                     >
@@ -82,7 +80,6 @@ export default function MegaMenu({ isOpen, onClose }: MegaMenuProps) {
                 </ul>
               </div>
 
-              {/* Accessories */}
               <div>
                 <h3 className="text-xl font-semibold mb-4 text-yellow-400 border-b border-yellow-400 pb-2">
                   🧤 Accessories
@@ -90,7 +87,7 @@ export default function MegaMenu({ isOpen, onClose }: MegaMenuProps) {
                 <ul className="space-y-2 text-lg grid">
                   {["Helmet", "Gloves", "Engine Oil"].map((item) => (
                     <Link
-                      to={`/all/products/${item}`}
+                      to={`/accessories`}
                       key={item}
                       className="cursor-pointer hover:text-cyan-400 hover:translate-x-2 transition-transform duration-300"
                     >

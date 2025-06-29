@@ -144,6 +144,14 @@ export default function CartItems() {
                 ${claimed ? discountedTotal.toFixed(2) : overallTotalPrice}
               </span>
             </div>
+            {!claimed && (
+              <Link
+                className="my-6 font-semibold text-xl  bg-green-600 p-2 rounded-md"
+                to="/"
+              >
+                click mystery offer
+              </Link>
+            )}
 
             {claimed && (
               <p className="text-green-400 text-sm text-center mt-2">

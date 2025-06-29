@@ -61,7 +61,7 @@ export default function AdminProducts() {
     toast.error("Failed to load products.");
     return (
       <div className="text-center text-red-500 text-xl mt-10">
-        ❌ Error loading products.
+        Error loading products.
       </div>
     );
   }

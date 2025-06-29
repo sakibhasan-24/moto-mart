@@ -7,6 +7,7 @@ import {
   useGetAllUsersMutation,
 } from "../../redux/api/user.api";
 import Loader from "../../components/loader/Loader";
+import ProductSkeleton from "../../components/skeleton/Skeleton";
 
 export default function Users() {
   const token = localStorage.getItem("token");
@@ -46,7 +47,7 @@ export default function Users() {
 
       {isLoading && (
         <p className="text-gray-400 text-center">
-          <Loader />
+          <ProductSkeleton />
         </p>
       )}
       {error && (
