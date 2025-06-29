@@ -5,7 +5,6 @@ export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://moto-gamma.vercel.app/api",
-    credentials: "include",
   }),
   endpoints: (builder) => ({}),
 });
